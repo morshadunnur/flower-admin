@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="{{ asset('qbadminui/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('qbadminui/css/vendor/bootstrap-4.3.1/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ mix('qbadminui/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('qbadminui/css/toastr.min.css') }}">
     <style>
     </style>
     <meta name="theme-color" content="#fafafa">
+    @stack('css')
 </head>
 <body class="position-relative">
     <!--[if IE]>
@@ -41,5 +43,9 @@
     <script src="{{ asset('qbadminui/js/plugins/echart_drw.js') }}"></script>
     <script src="{{ asset('qbadminui/js/plugins.js') }}"></script>
     <script src="{{ asset('qbadminui/js/main.js') }}"></script>
+    <script src="{{ asset('qbadminui/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('qbadminui/js/axios.min.js') }}"></script>
+    <script src="{{ asset('qbadminui/js/vue.js') }}"></script>
+@stack('js')
 </body>
 </html>
