@@ -3,14 +3,31 @@ new Vue({
     data: {
         category: {
             name: '',
-        }
+            parent_id: '',
+            slug: ''
+        },
+        categories: []
     },
     methods: {
+        getCategoryList(){
+            axios.get(CategoryListRoute)
+                .then((response) => {
+                    if (response.status === 200){
+                        this.categories = response.data.data;
+                    }else{
+                        toastr.error(response.data.message);
+                    }
+                })
+                .catch(error => {
+                    toastr.error(error.message)
+                })
+        },
         createCategory(route) {
             axios.post(route, this.category)
                 .then((response) => {
                     if(response.status === 201){
                         this.resetCategory();
+                        this.getCategoryList();
                         toastr.success(response.data.message);
                     }else{
                         this.resetCategory();
@@ -21,9 +38,48 @@ new Vue({
                     toastr.error(error.message);
             })
         },
+        updateCategory(route){
+            axios.put(route, {
+                name: this.category.name,
+                slug: this.category.slug
+            })
+                .then((response) => {
+                    if(response.status === 201){
+                        this.resetCategory();
+                        this.getCategoryList();
+                        toastr.success(response.data.message);
+                    }else{
+                        this.resetCategory();
+                        toastr.error(response.data.message);
+                    }
+                }).catch(error => {
+                this.resetCategory();
+                toastr.error(error.message);
+            })
+        },
+        deleteCategory(route){
+            axios.delete(route)
+                .then((response) => {
+                    if(response.status === 204){
+                        this.resetCategory();
+                        this.getCategoryList();
+                        toastr.success(response.message);
+                    }else{
+                        this.resetCategory();
+                        toastr.error(response.message);
+                    }
+                }).catch(error => {
+                this.resetCategory();
+                toastr.error(error.message);
+            })
+        },
+        setCategory(category){
+            this.category = category
+        },
         resetCategory() {
             this.category = {
-                name: ''
+                name: '',
+                parent_id: ''
             }
         }
     },
@@ -33,7 +89,11 @@ new Vue({
     watch: {
 
     },
-    mounted() {
+    created() {
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        this.getCategoryList();
+    },
+    mounted() {
+
     }
 });

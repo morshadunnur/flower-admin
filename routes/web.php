@@ -23,4 +23,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/categories', 'CategoryController@index')->name('categories');
     Route::post('/categories', 'CategoryController@addCategory')->name('categories.store');
+    Route::put('/categories/{id}', 'CategoryController@updateCategory')->name('categories.update');
+    Route::delete('/categories/{id}', 'CategoryController@deleteCategory')->name('categories.destroy');
+});
+
+Route::group(['middleware' => ['auth'], 'prefix' => 'api'], function (){
+    Route::get('/categories', 'CategoryController@getCategoryList')->name('api.category.list');
 });

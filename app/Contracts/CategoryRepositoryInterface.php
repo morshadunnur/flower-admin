@@ -10,6 +10,7 @@ namespace App\Contracts;
 interface CategoryRepositoryInterface
 {
     /**
+     * @param mixed ...$params
      * @return mixed
      */
     public function get();
@@ -28,8 +29,9 @@ interface CategoryRepositoryInterface
 
     /**
      * @param $id
+     * @param array $data
      * @return mixed
      */
-    public function update($id);
+    public function update($id, array $data);
 
 }

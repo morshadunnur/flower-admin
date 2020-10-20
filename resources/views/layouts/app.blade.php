@@ -21,6 +21,12 @@
     <style>
     </style>
     <meta name="theme-color" content="#fafafa">
+    <style>
+        [v-cloak] {display: none}
+        .cursor-pointer{
+            cursor: pointer !important;
+        }
+    </style>
     @stack('css')
 </head>
 <body class="position-relative">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid px-0" id="categoryPage">
+    <div class="container-fluid px-0" id="categoryPage" v-cloak>
         <!-- The side bar -->
     @include('layouts.partials.sidebar')
 
@@ -161,16 +161,43 @@
                 <div class="page-heading border-bottom d-flex flex-row">
                     <h5 class="font-weight-normal">Category</h5>
                 </div>
-                <div class="row">
+                <div class="row mt-lg-5">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Category Name</label>
                             <input type="text" v-model="category.name" id="name" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="parent_cat">Parent Category</label>
+                            <select class="form-control" id="parent_cat" v-model="category.parent_id">
+                                <option v-for="(category, index) in categories" :value="category.id">@{{ category.name }}</option>
+                            </select>
+                        </div>
                         <button class="btn btn-info" @click="createCategory('{{ route('categories.store') }}')">Save</button>
                     </div>
-                </div>
+                    <div class="col-md-8">
+                        <h5 class="text-center">Category List</h5>
+                        <div class="card" v-if="categories">
+                            <div class="card-body">
+                                <div class="cursor-pointer" v-for="(cat,i) in categories" :key="i"><div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="">@{{ cat.name }}</span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-edit fa-1x mr-2" data-toggle="modal" data-target="#editCategory" data-backdrop="static" @click="setCategory(cat)"></i>
+                                            <i class="fa fa-trash fa-1x" data-toggle="modal" data-target="#deleteCategory" data-backdrop="static" @click="setCategory(cat)"></i>
+                                        </div>
+                                    </div>
+                                    <li class="ml-4" v-if="cat.childs" v-for="(child,k) in cat.childs">@{{ child.name }}</li>
 
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+@include('modals.category.edit')
+@include('modals.category.delete')
             </div>
         </main>
         <!-- Footer section -->
@@ -181,5 +208,8 @@
     </div>
 @endsection
 @push('js')
+    <script>
+        let CategoryListRoute = '{{ route('api.category.list') }}'
+    </script>
     <script type="module" src="{{ asset('js/pages/category.js') }}"></script>
 @endpush
