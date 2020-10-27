@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="edit_parent_cat">Parent Category</label>
                         <select class="form-control" id="edit_parent_cat" v-model="category.parent_id">
-                            <option v-for="(category, index) in categories" :value="category.id">@{{ category.name }}</option>
+                            <option v-for="(category, index) in categories.data" :value="category.id">@{{ category.name }}</option>
                         </select>
                     </div>
                 </div>

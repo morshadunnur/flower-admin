@@ -54,7 +54,9 @@
                             <a href="#" class="dropdown-item text-secondary-light p-0">
                                 <div class="d-flex flex-row border-bottom">
                                     <!-- Profile image -->
-                                    <div class="notification-icon bg-secondary-c pt-3"><img src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img" class="w-75 img-round"></div>
+                                    <div class="notification-icon bg-secondary-c pt-3"><img
+                                                src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img"
+                                                class="w-75 img-round"></div>
                                     <!-- Message notification -->
                                     <div class="flex-grow-1 px-3 py-3">
                                         <p class="mb-0">James <span class="badge badge-pill badge-primary">1</span></p>
@@ -66,7 +68,9 @@
                             <a href="#" class="dropdown-item text-secondary-light p-0">
                                 <div class="d-flex flex-row border-bottom">
                                     <!-- Profile image -->
-                                    <div class="notification-icon bg-secondary-c pt-3"><img src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img" class="w-75 img-round"></div>
+                                    <div class="notification-icon bg-secondary-c pt-3"><img
+                                                src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img"
+                                                class="w-75 img-round"></div>
                                     <!-- Message notification -->
                                     <div class="flex-grow-1 px-3 py-3">
                                         <p class="mb-0">Jhone <span class="badge badge-pill badge-primary">1</span></p>
@@ -78,7 +82,9 @@
                             <a href="#" class="dropdown-item text-secondary-light p-0">
                                 <div class="d-flex flex-row border-bottom">
                                     <!-- Profile image -->
-                                    <div class="notification-icon bg-secondary-c pt-3"><img src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img" class="w-75 img-round"></div>
+                                    <div class="notification-icon bg-secondary-c pt-3"><img
+                                                src="{{ asset('qbadminui/img/profile.jpg') }}" alt="img"
+                                                class="w-75 img-round"></div>
                                     <!-- Message notification -->
                                     <div class="flex-grow-1 px-3 py-3">
                                         <p class="mb-0">Mariam <span class="badge badge-pill badge-primary">1</span></p>
@@ -102,9 +108,11 @@
                             <!-- Menu item -->
                             <a href="#" class="dropdown-item text-secondary-light p-0">
                                 <div class="d-flex flex-row border-bottom">
-                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i class="far fa-envelope text-primary fa-lg"></i></div>
+                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i
+                                                class="far fa-envelope text-primary fa-lg"></i></div>
                                     <div class="flex-grow-1 px-3 py-3">
-                                        <p class="mb-0">New message <span class="badge badge-pill badge-primary">New</span></p>
+                                        <p class="mb-0">New message <span
+                                                    class="badge badge-pill badge-primary">New</span></p>
                                         <small>James : Hey! Are you busy?</small>
                                     </div>
                                 </div>
@@ -112,9 +120,11 @@
                             <!-- Menu item -->
                             <a href="#" class="dropdown-item text-secondary-light p-0">
                                 <div class="d-flex flex-row border-bottom">
-                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i class="fas fa-clipboard-list text-success fa-lg"></i></div>
+                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i
+                                                class="fas fa-clipboard-list text-success fa-lg"></i></div>
                                     <div class="flex-grow-1 px-3 py-3">
-                                        <p class="m-0">New order received <span class="badge badge-pill badge-success">New</span></p>
+                                        <p class="m-0">New order received <span class="badge badge-pill badge-success">New</span>
+                                        </p>
                                         <small>3 iPhone x</small>
                                     </div>
                                 </div>
@@ -122,9 +132,11 @@
                             <!-- Menu item -->
                             <a href="#" class="dropdown-item text-secondary-light p-0 pr-2">
                                 <div class="d-flex flex-row border-bottom">
-                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i class="fas fa-box-open text-warning fa-lg"></i></div>
+                                    <div class="notification-icon bg-secondary-c pt-3 px-3"><i
+                                                class="fas fa-box-open text-warning fa-lg"></i></div>
                                     <div class="flex-grow-1 px-3 py-3">
-                                        <p class="m-0">Product out of stock <span class="badge badge-pill badge-warning small">1</span></p>
+                                        <p class="m-0">Product out of stock <span
+                                                    class="badge badge-pill badge-warning small">1</span></p>
                                         <small>Headphone E63</small>
                                     </div>
                                 </div>
@@ -135,16 +147,18 @@
                     <!-- Profile action dropdown -->
                     <div class="dropdown dropdown-arow-none d-contents text-center mx-2">
                         <!-- Icon -->
-                        <a href="#" class="w-100 dropdown-toggle text-muted" data-toggle="dropdown"><img src="{{ asset('qbadminui/img/profile.jpg') }}" alt="profile" class="profile-avatar"></a>
+                        <a href="#" class="w-100 dropdown-toggle text-muted" data-toggle="dropdown"><img
+                                    src="{{ asset('qbadminui/img/profile.jpg') }}" alt="profile" class="profile-avatar"></a>
                         <!-- Dropdown Menu -->
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-max-height">
                             <!-- Menu items -->
-                            <a href="#" class="dropdown-item disabled small"><i class="far fa-user mr-1"></i> Md.Maruf Ahmed</a>
+                            <a href="#" class="dropdown-item disabled small"><i class="far fa-user mr-1"></i> Md.Maruf
+                                Ahmed</a>
                             <a href="#" class="dropdown-item text-secondary-light">Account setting</a>
                             <a href="#" class="dropdown-item text-secondary-light">Billing history</a>
-                            <a  class="dropdown-item text-secondary-light"
-                                href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                            <a class="dropdown-item text-secondary-light"
+                               href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                             >Sign out</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -170,34 +184,64 @@
                         <div class="form-group">
                             <label for="parent_cat">Parent Category</label>
                             <select class="form-control" id="parent_cat" v-model="category.parent_id">
-                                <option v-for="(category, index) in categories" :value="category.id">@{{ category.name }}</option>
+                                <option v-for="(category, index) in categories.data" :value="category.id">@{{
+                                    category.name }}
+                                </option>
                             </select>
                         </div>
-                        <button class="btn btn-info" @click="createCategory('{{ route('categories.store') }}')">Save</button>
+                        <div class="form-group">
+                            <label for="parent_cat">Status</label>
+                            <select class="form-control" id="parent_cat" v-model="category.status">
+                                <option  value="1" >Active</option>
+                                <option  value="0">In Active</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-info" @click="createCategory('{{ route('categories.store') }}')">Save
+                        </button>
                     </div>
                     <div class="col-md-8">
                         <h5 class="text-center">Category List</h5>
-                        <div class="card" v-if="categories">
+                        <div class="card" v-if="categories.data">
                             <div class="card-body">
-                                <div class="cursor-pointer" v-for="(cat,i) in categories" :key="i"><div class="d-flex justify-content-between">
+                                <div class="cursor-pointer" v-for="(cat,i) in categories.data" :key="i">
+                                    <div class="d-flex justify-content-between">
                                         <div>
                                             <span class="">@{{ cat.name }}</span>
                                         </div>
                                         <div>
-                                            <i class="fa fa-edit fa-1x mr-2" data-toggle="modal" data-target="#editCategory" data-backdrop="static" @click="setCategory(cat)"></i>
-                                            <i class="fa fa-trash fa-1x" data-toggle="modal" data-target="#deleteCategory" data-backdrop="static" @click="setCategory(cat)"></i>
+                                            <i class="fa fa-edit fa-1x mr-2" data-toggle="modal"
+                                               data-target="#editCategory" data-backdrop="static"
+                                               @click="setCategory(cat)"></i>
+                                            <i class="fa fa-trash fa-1x" data-toggle="modal"
+                                               data-target="#deleteCategory" data-backdrop="static"
+                                               @click="setCategory(cat)"></i>
                                         </div>
                                     </div>
-                                    <li class="ml-4" v-if="cat.childs" v-for="(child,k) in cat.childs">@{{ child.name }}</li>
+                                    <li class="ml-4" v-if="cat.childs" v-for="(child,k) in cat.childs">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                @{{ child.name }}
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-trash fa-1x" data-toggle="modal"
+                                                   data-target="#deleteCategory" data-backdrop="static"
+                                                   @click="setCategory(child)"></i>
+                                            </div>
+                                        </div>
+                                    </li>
 
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    <pagination-vue :pagination="categories"
+                                                    @paginate="getCategoryList"></pagination-vue>
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
-@include('modals.category.edit')
-@include('modals.category.delete')
+                @include('modals.category.edit')
+                @include('modals.category.delete')
             </div>
         </main>
         <!-- Footer section -->
@@ -211,5 +255,6 @@
     <script>
         let CategoryListRoute = '{{ route('api.category.list') }}'
     </script>
+    <script src="{{ asset('js/pages/pagination.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/category.js') }}"></script>
 @endpush

@@ -1,16 +1,24 @@
+Vue.component('pagination-vue', paginationCustom);
 new Vue({
     el: '#categoryPage',
     data: {
         category: {
             name: '',
             parent_id: '',
-            slug: ''
+            slug: '',
+            status: 1,
         },
-        categories: []
+        categories: {
+            total: 0,
+            from: 1,
+            to: 5,
+            current_page: 1,
+        }
     },
     methods: {
         getCategoryList(){
-            axios.get(CategoryListRoute)
+            let route = CategoryListRoute + '?&page=' + this.categories.current_page;
+            axios.get(route)
                 .then((response) => {
                     if (response.status === 200){
                         this.categories = response.data.data;

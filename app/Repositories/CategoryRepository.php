@@ -35,7 +35,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return $this->model->select('id','name', 'slug', 'status', 'parent_id')->where('parent_id', 0)
             ->with('childs')
-            ->get();
+            ->paginate(3);
     }
 
 
@@ -48,7 +48,8 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->model->create([
            'name' => $data['name'],
            'slug' => Str::slug($data['name']),
-           'parent_id' => $data['parent_id'] ?? 0
+           'parent_id' => $data['parent_id'] ?? 0,
+           'status' => $data['status']
         ]);
     }
 
