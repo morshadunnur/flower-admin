@@ -23,6 +23,7 @@
             <ul class="side-menu p-0 m-0 mt-3">
                 <li class="side-menu-item px-3"><a href="{{ route('home') }}" class="w-100 py-3 pl-4">Dashboard</a></li>
                 <li class="side-menu-item px-3"><a href="{{ route('categories') }}" class="w-100 py-3 pl-4">Category</a></li>
+                <li class="side-menu-item px-3"><a href="{{ route('product.index') }}" class="w-100 py-3 pl-4">{{ __('Products') }}</a></li>
                 <!-- Sub menu parent -->
 {{--                <li class="side-menu-item px-3"><a href="#" class="w-100 py-3 pl-4 sub-menu-parent" data-toggle="collapse" data-target="#sub_menu_1" aria-expanded="false" aria-controls="sub_menu_1">Category</a></li>--}}
 {{--                <!-- Sub menu -->--}}

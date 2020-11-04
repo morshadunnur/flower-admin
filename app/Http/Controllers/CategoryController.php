@@ -56,7 +56,7 @@ class CategoryController extends Controller
     public function getCategoryList(CategoryRepositoryInterface $categoryRepository)
     {
         try{
-            $categories = $categoryRepository->get();
+            $categories = $categoryRepository->get(true);
             return response()->json([
                 'message' => 'Category List',
                 'data' => $categories

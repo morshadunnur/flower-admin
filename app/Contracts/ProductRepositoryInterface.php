@@ -7,13 +7,12 @@
 namespace App\Contracts;
 
 
-interface CategoryRepositoryInterface
+interface ProductRepositoryInterface
 {
     /**
-     * @param bool $paginate
      * @return mixed
      */
-    public function get(bool $paginate);
+    public function get();
 
     /**
      * @param $id
@@ -33,5 +32,4 @@ interface CategoryRepositoryInterface
      * @return mixed
      */
     public function update($id, array $data);
-
 }

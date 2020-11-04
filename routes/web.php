@@ -25,6 +25,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/categories', 'CategoryController@addCategory')->name('categories.store');
     Route::put('/categories/{id}', 'CategoryController@updateCategory')->name('categories.update');
     Route::delete('/categories/{id}', 'CategoryController@deleteCategory')->name('categories.destroy');
+
+    Route::get('products', 'ProductController@index')->name('product.index');
+    Route::post('products', 'ProductController@store')->name('product.store');
+
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'api'], function (){

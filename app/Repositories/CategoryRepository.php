@@ -29,13 +29,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * @param bool $paginate
      * @return mixed
      */
-    public function get()
+    public function get($paginate = false)
     {
-        return $this->model->select('id','name', 'slug', 'status', 'parent_id')->where('parent_id', 0)
-            ->with('childs')
-            ->paginate(3);
+        $categories =  $this->model->select('id','name', 'slug', 'status', 'parent_id')->where('parent_id', 0)
+            ->with('childs');
+        return $paginate ? $categories->paginate(3) : $categories->get();
     }
 
 
