@@ -28,9 +28,12 @@ class ProductRepository implements ProductRepositoryInterface
         $this->model = $model;
     }
 
-    public function get()
+    public function get($selected_fields = ['*'], $relations = [])
     {
-        // TODO: Implement get() method.
+        return $this->model
+            ->select($selected_fields)
+            ->with($relations)
+            ->get();
     }
 
     public function find($id)

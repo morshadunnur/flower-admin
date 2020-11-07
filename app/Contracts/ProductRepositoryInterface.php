@@ -10,9 +10,11 @@ namespace App\Contracts;
 interface ProductRepositoryInterface
 {
     /**
+     * @param array $selected_fields
+     * @param array $relations
      * @return mixed
      */
-    public function get();
+    public function get(array $selected_fields,array $relations);
 
     /**
      * @param $id
