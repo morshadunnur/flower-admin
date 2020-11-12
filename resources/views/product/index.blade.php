@@ -217,6 +217,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="single">Single File</label>
+                            <input type="file" @change.prevent="handleSingleFile" id="singleFile" accept="image/*" ref="singleFile" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" @click.prevent="uploadSinglePhoto('{{ route('product.photo') }}')">Upload</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="multiple">Multiple Files</label>
+                            <input type="file" @change.prevent="handleMultipleFile" id="multipleFile" accept="image/*" ref="multipleFile" class="form-control" multiple>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" @click.prevent="uploadMultiplePhoto('{{ route('product.photo') }}')">Upload</button>
+                        </div>
+                    </div>
                 </div>
 
             </div>

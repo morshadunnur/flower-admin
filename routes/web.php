@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::get('products', 'ProductController@index')->name('product.index');
     Route::post('products', 'ProductController@store')->name('product.store');
+    Route::post('photo', 'ProductController@uploadPhoto')->name('product.photo');
 
 });
 

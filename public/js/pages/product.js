@@ -11,7 +11,9 @@ let app = new Vue({
         },
         loaders: {
             loading: false,
-        }
+        },
+        file: '',
+        files: [],
     },
     methods: {
         StoreProduct(route){
@@ -36,6 +38,44 @@ let app = new Vue({
                 description: '',
                 status: 1,
             }
+        },
+        handleSingleFile(){
+            this.file = this.$refs.singleFile.files[0];
+        },
+        handleMultipleFile(){
+            for (let file of this.$refs.multipleFile.files){
+                this.files.push(file);
+            }
+        },
+        uploadSinglePhoto(route){
+            let formData = new FormData();
+            formData.append('photo', this.file);
+            axios.post(route, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+        uploadMultiplePhoto(route){
+            let formData = new FormData();
+            formData.append('photos', this.files);
+            axios.post(route, formData , {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         }
     },
     computed: {
