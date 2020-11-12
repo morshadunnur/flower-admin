@@ -57,7 +57,6 @@ class ProductController extends Controller
         }catch (ValidationException $exception){
             return response()->json(['message' => $exception->getMessage()]);
         }catch (QueryException|\Exception $exception){
-            dd($exception->getMessage());
             return response()->json(['message' => 'Something went wrong']);
         }
     }
