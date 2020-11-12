@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('sku')->unique()->index();
+            $table->string('feature_image')->nullable();
             $table->tinyInteger('status')->default(1)->comment('
             1 = active,
             2 = inactive,

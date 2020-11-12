@@ -8,14 +8,28 @@ let app = new Vue({
             sku: '',
             description: '',
             status: 1,
+            feature_image: '',
         },
         loaders: {
             loading: false,
-        }
+        },
+        file: '',
+        files: [],
     },
     methods: {
         StoreProduct(route){
-            axios.post(route, this.product)
+            let formData = new FormData();
+            formData.append('category_id', this.product.category_id);
+            formData.append('title', this.product.title);
+            formData.append('status', this.product.status);
+            formData.append('sku', this.product.sku);
+            formData.append('description', this.product.description);
+            formData.append('feature_image', this.product.feature_image)
+            axios.post(route, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then((response) => {
                     if (response.status === 201){
                         this.resetProduct();
@@ -36,6 +50,12 @@ let app = new Vue({
                 description: '',
                 status: 1,
             }
+            const featureImage = this.$refs.featureImage;
+            featureImage.type = 'text';
+            featureImage.type = 'file';
+        },
+        handleFeatureImage(){
+            this.product.feature_image = this.$refs.featureImage.files[0];
         }
     },
     computed: {

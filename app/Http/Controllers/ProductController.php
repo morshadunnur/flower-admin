@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Contracts\CategoryRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
+use App\Traits\UploadFile;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
+    use UploadFile;
     /**
      * @var Request
      */
@@ -43,9 +45,11 @@ class ProductController extends Controller
                 'category_id' => 'required|integer|min:1|exists:categories,id',
                 'description' => 'nullable|string',
                 'sku' => 'required|string|unique:products,sku',
-                'status' => 'required|numeric|min:1|max:3'
+                'status' => 'required|numeric|min:1|max:3',
+                'feature_image' => ['required','image', 'mimes:jpg,png,jpeg,svg','max:2048']
             ]);
             $data['published_by'] = auth()->user()->id;
+            $data['image'] = $this->uploadSingleImage($data['feature_image'], '/products', 'public', true, 200);
             $productRepository->store($data);
             return response()->json([
                 'message' => 'Products Added'
@@ -53,6 +57,7 @@ class ProductController extends Controller
         }catch (ValidationException $exception){
             return response()->json(['message' => $exception->getMessage()]);
         }catch (QueryException|\Exception $exception){
+            dd($exception->getMessage());
             return response()->json(['message' => 'Something went wrong']);
         }
     }

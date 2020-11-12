@@ -200,6 +200,9 @@
                                             @endforeach
                                     </select>
                                 </div>
+                                <div class="form group">
+                                    <input type="file" class="form-control" id="featureImage" ref="featureImage" accept="image/*" @change.prevent="handleFeatureImage">
+                                </div>
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select v-model="product.status" id="status" class="form-control">
