@@ -38,7 +38,7 @@ let app = new Vue({
             axios.post(route, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
             })
                 .then((response) => {
                     if (response.status === 201){
@@ -49,7 +49,8 @@ let app = new Vue({
                     }
                 })
                 .catch(e => {
-                    console.log(e.message);
+                    console.log(e);
+                    toastr.error(e.response.data.message);
                 });
         },
         resetProduct() {
@@ -59,10 +60,18 @@ let app = new Vue({
                 sku: '',
                 description: '',
                 status: 1,
+                feature_image: '',
+                cost_price: '',
+                selling_price: '',
+                quantity: '',
+                gallery: [],
             }
             const featureImage = this.$refs.featureImage;
+            const galleryImages = this.$refs.galleryImages;
             featureImage.type = 'text';
             featureImage.type = 'file';
+            galleryImages.type = 'text';
+            galleryImages.type = 'file';
         },
         handleFeatureImage(){
             this.product.feature_image = this.$refs.featureImage.files[0];
