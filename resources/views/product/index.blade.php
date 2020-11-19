@@ -216,9 +216,33 @@
                                     <input type="text" class="form-control" id="published_by" value="{{ auth()->user()->name }}" readonly>
                                 </div>
 
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form group">
+                                    <label for="galleryImages">Upload Gallery Images</label>
+                                    <input type="file" class="form-control" id="galleryImages" ref="galleryImages" accept="image/*" @change.prevent="handleGalleryImage" multiple>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cost_price">Cost Price</label>
+                                    <input type="text" id="cost_price" class="form-control" v-model="product.cost_price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="selling_price">Selling Price</label>
+                                    <input type="text" id="selling_price" class="form-control" v-model="product.selling_price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" id="quantity" class="form-control" v-model="product.quantity">
+                                </div>
                                 <button class="btn btn-success" @click.prevent="StoreProduct('{{ route('product.store') }}')">Save</button>
                             </div>
                         </div>
+
                     </div>
                 </div>
 

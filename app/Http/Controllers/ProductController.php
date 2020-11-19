@@ -7,6 +7,7 @@ use App\Contracts\ProductRepositoryInterface;
 use App\Traits\UploadFile;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
@@ -46,11 +47,44 @@ class ProductController extends Controller
                 'description' => 'nullable|string',
                 'sku' => 'required|string|unique:products,sku',
                 'status' => 'required|numeric|min:1|max:3',
-                'feature_image' => ['required','image', 'mimes:jpg,png,jpeg,svg','max:2048']
+                'feature_image' => ['required','image', 'mimes:jpg,png,jpeg,svg','max:12048'],
+                'cost_price' => 'required|numeric',
+                'selling_price' => 'required|numeric',
+                'quantity' => 'required|numeric',
+                'gallery'  => ['nullable', 'array', 'max:20', function($attribute, $value, $fail){
+                    if (!$this->request->file('gallery')){
+                        $fail('Allow only file type');
+                    }
+                }]
             ]);
+
             $data['published_by'] = auth()->user()->id;
             $data['image'] = $this->uploadSingleImage($data['feature_image'], '/products', 'public', true, 200);
-            $productRepository->store($data);
+            $data['images'] = [];
+            foreach ($data['gallery'] as $gallery){
+                $data['images'] = $this->uploadSingleImage($gallery, '/gallery', 'public', true);
+            }
+            DB::beginTransaction();
+            try {
+                $product = $productRepository->store($data);
+            }catch (QueryException $exception){
+                DB::rollBack();
+                app('log')->debug("product query", [$exception]);
+            }
+            try {
+                $price = $productRepository->store($data);
+            }catch (QueryException $exception){
+                DB::rollBack();
+                app('log')->debug("product query", [$exception]);
+            }
+            try {
+                $gallery = $productRepository->store($data);
+            }catch (QueryException $exception){
+                DB::rollBack();
+                app('log')->debug("product query", [$exception]);
+            }
+            DB::commit();
+
             return response()->json([
                 'message' => 'Products Added'
             ], 201);
