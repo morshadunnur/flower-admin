@@ -12,9 +12,10 @@ interface ProductRepositoryInterface
     /**
      * @param array $selected_fields
      * @param array $relations
+     * @param bool $paginate
      * @return mixed
      */
-    public function get(array $selected_fields,array $relations);
+    public function get(array $selected_fields,array $relations, bool $paginate);
 
     /**
      * @param $id

@@ -29,11 +29,16 @@ class ProductController extends Controller
 
         $this->request = $request;
     }
-    public function index(CategoryRepositoryInterface $categoryRepository)
+    public function index()
+    {
+        return view('product.index');
+    }
+
+    public function create(CategoryRepositoryInterface $categoryRepository)
     {
         $data['categories'] = $categoryRepository->get(false);
         $data['categories'] = $data['categories']->pluck('name', 'id')->toArray();
-        return view('product.index', $data);
+        return view('product.create', $data);
     }
 
     /**
@@ -108,6 +113,19 @@ class ProductController extends Controller
             return response()->json(['message' => $exception->getMessage()]);
         }catch (QueryException|\Exception $exception){
             return response()->json(['message' => 'Something went wrong']);
+        }
+    }
+
+    public function getProductList(Request $request, ProductRepositoryInterface $productRepository)
+    {
+        try{
+            $products = $productRepository->get(['id','category_id','title','sku','feature_image','status'], ['prices', 'images','category'], true);
+            return response()->json([
+                'message' => 'Product List',
+                'data' => $products
+            ], 200);
+        }catch (QueryException|\Exception $exception){
+            return response()->json(['message' => $exception->getMessage()]);
         }
     }
 }

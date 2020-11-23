@@ -28,12 +28,12 @@ class ProductRepository implements ProductRepositoryInterface
         $this->model = $model;
     }
 
-    public function get($selected_fields = ['*'], $relations = [])
+    public function get(array $selected_fields = ['*'],array $relations = [], bool $paginate = false)
     {
-        return $this->model
+        $products =  $this->model
             ->select($selected_fields)
-            ->with($relations)
-            ->get();
+            ->with($relations);
+        return $paginate ? $products->paginate(10) : $products->get();
     }
 
     public function find($id)

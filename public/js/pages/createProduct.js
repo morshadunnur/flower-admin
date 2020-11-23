@@ -1,5 +1,5 @@
 let app = new Vue({
-    el: '#productPage',
+    el: '#createProductPage',
     data: {
         products: [],
         product: {

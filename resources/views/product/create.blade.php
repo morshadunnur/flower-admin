@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid px-0" id="productPage" v-cloak>
+    <div class="container-fluid px-0" id="createProductPage" v-cloak>
         <!-- The side bar -->
     @include('layouts.partials.sidebar')
 
@@ -177,40 +177,72 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-responsive text-dark">
-                                <thead>
-                                <tr class="text-center">
-                                    <th width="10%"><p class="mb-0">Serial</p></th>
-                                    <th width="20%"><p class="mb-0">Feature Image</p></th>
-                                    <th width="20%"><p class="mb-0">Product Name</p></th>
-                                    <th width="10%"><p class="mb-0">SKU</p></th>
-                                    <th width="30"><p class="mb-0">Category Name</p></th>
-                                    <th width="15%"><p class="mb-0">Status</p></th>
-                                    <th width="15%"><p class="mb-0">Action</p></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Table data -->
-                                <tr class="text-center" v-for="(product, index) in products.data">
-                                    <td><p class="mb-0 font-weight-bold">@{{ ++index }}</p></td>
-                                    <td><img src="img/profile.jpg" alt="Avatar" class="profile-avatar w-50 mb-0"></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.title }}</p></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.sku }}</p></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.category.name }}</p></td>
-                                    <td><span class="badge badge-pill" :class="product.status == 1 ? 'badge-success' : 'badge-danger'">@{{ product.status == 1 ? 'Active' : 'Inactive' }}</span></td>
-                                    <td class="p-3">
-                                        <div class="d-flex flex-row justify-content-around align-items-center">
-                                            <a href="#"><i class="fas fa-pencil-alt text-success"></i></a>
-                                            <a href="#"><i class="fas fa-times-circle text-danger"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="title">Product Title</label>
+                                    <input type="text" id="title" class="form-control" v-model="product.title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Product Description</label>
+                                    <textarea rows="5" cols="10" id="description" class="form-control" v-model="product.description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sku">Product Sku</label>
+                                    <input type="text" id="sku" class="form-control" v-model="product.sku">
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select v-model="product.category_id" id="category" class="form-control">
+                                        @foreach($categories as $category_id => $category_name)
+                                            <option value="{{ $category_id }}">{{ $category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form group">
+                                    <input type="file" class="form-control" id="featureImage" ref="featureImage" accept="image/*" @change.prevent="handleFeatureImage">
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select v-model="product.status" id="status" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="2">In Active</option>
+                                        <option value="3">Pending</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="published_by">{{ __('Published By') }}</label>
+                                    <input type="text" class="form-control" id="published_by" value="{{ auth()->user()->name }}" readonly>
+                                </div>
 
-                                </tbody>
-                            </table>
+
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form group">
+                                    <label for="galleryImages">Upload Gallery Images</label>
+                                    <input type="file" class="form-control" id="galleryImages" ref="galleryImages" accept="image/*" @change.prevent="handleGalleryImage" multiple>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cost_price">Cost Price</label>
+                                    <input type="text" id="cost_price" class="form-control" v-model="product.cost_price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="selling_price">Selling Price</label>
+                                    <input type="text" id="selling_price" class="form-control" v-model="product.selling_price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" id="quantity" class="form-control" v-model="product.quantity">
+                                </div>
+                                <button class="btn btn-success" @click.prevent="StoreProduct('{{ route('product.store') }}')">Save</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -224,9 +256,7 @@
     </div>
 @endsection
 @push('js')
-    <script>
-        let productListRoute = '{{ route('api.product.list') }}'
-    </script>
+
     <script src="{{ asset('js/pages/pagination.js') }}"></script>
-    <script type="module" src="{{ asset('js/pages/products.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/createProduct.js') }}"></script>
 @endpush

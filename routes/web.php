@@ -27,10 +27,12 @@ Route::group(['middleware' => ['auth']], function (){
     Route::delete('/categories/{id}', 'CategoryController@deleteCategory')->name('categories.destroy');
 
     Route::get('products', 'ProductController@index')->name('product.index');
+    Route::get('products/create', 'ProductController@create')->name('product.create');
     Route::post('products', 'ProductController@store')->name('product.store');
 
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'api'], function (){
     Route::get('/categories', 'CategoryController@getCategoryList')->name('api.category.list');
+    Route::get('/products', 'ProductController@getProductList')->name('api.product.list');
 });
