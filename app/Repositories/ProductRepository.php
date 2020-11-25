@@ -38,7 +38,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function find($id)
     {
-        // TODO: Implement find() method.
+        return $this->model->find($id);
     }
 
     public function store(array $data)
@@ -58,5 +58,10 @@ class ProductRepository implements ProductRepositoryInterface
     public function update($id, array $data)
     {
         // TODO: Implement update() method.
+    }
+
+    public function destroy($id)
+    {
+        return $this->model->destroy($id);
     }
 }

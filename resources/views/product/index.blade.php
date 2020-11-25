@@ -202,8 +202,9 @@
                                     <td><span class="badge badge-pill" :class="product.status == 1 ? 'badge-success' : 'badge-danger'">@{{ product.status == 1 ? 'Active' : 'Inactive' }}</span></td>
                                     <td class="p-3">
                                         <div class="d-flex flex-row justify-content-around align-items-center">
-                                            <a href="#"><i class="fas fa-pencil-alt text-success"></i></a>
-                                            <a href="#"><i class="fas fa-times-circle text-danger"></i></a>
+                                            <a href="#"><i class="fas fa-eye text-info"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#editProduct" @click="selectProduct(product)"><i class="fas fa-pencil-alt text-success"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#deleteProduct" @click="selectProduct(product)"><i class="fas fa-times-circle text-danger"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -213,6 +214,8 @@
                         </div>
                     </div>
                 </div>
+                @include('modals.products.delete')
+                @include('modals.products.edit')
 
             </div>
         </main>
@@ -225,7 +228,8 @@
 @endsection
 @push('js')
     <script>
-        let productListRoute = '{{ route('api.product.list') }}'
+        let productListRoute = '{{ route('api.product.list') }}';
+        let CategoryListRoute = '{{ route('api.category.list.all') }}';
     </script>
     <script src="{{ asset('js/pages/pagination.js') }}"></script>
     <script type="module" src="{{ asset('js/pages/products.js') }}"></script>

@@ -66,6 +66,19 @@ class CategoryController extends Controller
         }
     }
 
+    public function allCategory(CategoryRepositoryInterface $categoryRepository)
+    {
+        try{
+            $categories = $categoryRepository->get(false);
+            return response()->json([
+                'message' => 'Category List',
+                'data' => $categories
+            ], 200);
+        }catch (QueryException|\Exception $exception){
+            return response()->json(['message' => $exception->getMessage()]);
+        }
+    }
+
     /**
      * @param $id
      * @param Request $request
