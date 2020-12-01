@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid px-0" id="productPage" v-cloak>
+    <div class="container-fluid px-0" id="detailProduct" v-cloak>
         <!-- The side bar -->
     @include('layouts.partials.sidebar')
 
@@ -177,45 +177,14 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-responsive text-dark">
-                                <thead>
-                                <tr class="text-center">
-                                    <th width="10%"><p class="mb-0">Serial</p></th>
-                                    <th width="20%"><p class="mb-0">Feature Image</p></th>
-                                    <th width="20%"><p class="mb-0">Product Name</p></th>
-                                    <th width="10%"><p class="mb-0">SKU</p></th>
-                                    <th width="30"><p class="mb-0">Category Name</p></th>
-                                    <th width="15%"><p class="mb-0">Status</p></th>
-                                    <th width="15%"><p class="mb-0">Action</p></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Table data -->
-                                <tr class="text-center" v-for="(product, index) in products.data">
-                                    <td><p class="mb-0 font-weight-bold">@{{ ++index }}</p></td>
-                                    <td><img src="img/profile.jpg" alt="Avatar" class="profile-avatar w-50 mb-0"></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.title }}</p></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.sku }}</p></td>
-                                    <td><p class="mb-0 font-weight-normal">@{{ product.category.name }}</p></td>
-                                    <td><span class="badge badge-pill" :class="product.status == 1 ? 'badge-success' : 'badge-danger'">@{{ product.status == 1 ? 'Active' : 'Inactive' }}</span></td>
-                                    <td class="p-3">
-                                        <div class="d-flex flex-row justify-content-around align-items-center">
-                                            <a :href="'{{ route('product.details.page', ':id') }}'.replace(':id', product.id)"><i class="fas fa-eye text-info"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#editProduct" @click="selectProduct(product)"><i class="fas fa-pencil-alt text-success"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#deleteProduct" @click="selectProduct(product)"><i class="fas fa-times-circle text-danger"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                    <div class="col-6">
 
-                                </tbody>
-                            </table>
-                        </div>
+                    </div>
+                    <div class="col-6">
+
+
                     </div>
                 </div>
-                @include('modals.products.delete')
-                @include('modals.products.edit')
 
             </div>
         </main>
@@ -228,9 +197,9 @@
 @endsection
 @push('js')
     <script>
-        let productListRoute = '{{ route('api.product.list') }}';
-        let CategoryListRoute = '{{ route('api.category.list.all') }}';
+        let productId = '{{ $product->id }}';
+        let productDetailsRoute = '{{ route('api.product.details') }}'
     </script>
     <script src="{{ asset('js/pages/pagination.js') }}"></script>
-    <script type="module" src="{{ asset('js/pages/products.js') }}"></script>
+    <script type="module" src="{{ asset('js/pages/detailProduct.js') }}"></script>
 @endpush

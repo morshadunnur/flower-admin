@@ -19,15 +19,21 @@ class ProductController extends Controller
      * @var Request
      */
     private $request;
+    /**
+     * @var ProductRepositoryInterface
+     */
+    private $productRepository;
 
     /**
      * ProductController constructor.
      * @param Request $request
+     * @param ProductRepositoryInterface $productRepository
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, ProductRepositoryInterface $productRepository)
     {
 
         $this->request = $request;
+        $this->productRepository = $productRepository;
     }
     public function index()
     {
@@ -139,6 +145,32 @@ class ProductController extends Controller
             ], 200);
         }catch (QueryException|\Exception $exception){
             return response()->json(['message' => $exception->getMessage()]);
+        }
+    }
+
+    public function detailsPage($id)
+    {
+        $data['product'] = $this->productRepository->find($id);
+        if (!$data['product']) return abort(404);
+        return view('product.details', $data);
+    }
+
+    public function getProductDetails()
+    {
+        try {
+            $data = $this->validate($this->request, [
+                'product_id' => 'required|integer|exists:products,id'
+            ]);
+            $product = $this->productRepository->detailsById($data['product_id'], ['*'], ['images', 'prices']);
+            return response()->json($product, 200);
+        }catch (ValidationException $exception){
+            return response()->json([
+                'message' => $exception->errors()
+            ], 422);
+        }catch (QueryException|\Exception $exception){
+            return response()->json([
+                'message' => 'Something Went wrong.'
+            ], 406);
         }
     }
 }
