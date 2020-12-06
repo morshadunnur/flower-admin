@@ -173,16 +173,68 @@
             <!--Page Body part -->
             <div class="page-body p-4 text-dark">
                 <div class="page-heading border-bottom d-flex flex-row">
-                    <h5 class="font-weight-normal">Products</h5>
+                    <h5 class="font-weight-normal">Product Details</h5>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-6">
-
+                        <div class="d-flex justify-content-between">
+                            <p>Product Name</p>
+                            <p><strong>@{{ product.title  }}</strong></p>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <p>Sku</p>
+                            <p><strong>@{{ product.sku  }}</strong></p>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <p>Product Description</p>
+                            <p><strong>@{{ product.description  }}</strong></p>
+                        </div>
                     </div>
                     <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <h5>Batch Prices</h5>
+                            <button class="btn btn-info">Add Stock</button>
+                        </div>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-responsive text-dark">
+                                <thead>
+                                <tr class="text-center">
+                                    <th width="20%"><p class="mb-0">
+                                            Batch Number
+                                        </p></th>
+                                    <th width="20%"><p class="mb-0">Quantity</p></th>
+                                    <th width="20%"><p class="mb-0">Cost Price</p></th>
+                                    <th width="10%"><p class="mb-0">Selling Price</p></th>
+                                    <th width="15%"><p class="mb-0">Action</p></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- Table data -->
+                                <tr class="text-center" v-for="(price, index) in product.prices">
 
+                                    <td>
+                                        <p class="mb-0 font-weight-bold">@{{ price.sku_uuid }}</p>
+                                    </td>
+                                    <td><p class="mb-0 font-weight-normal">@{{ price.quantity }}</p></td>
+                                    <td><p class="mb-0 font-weight-normal">@{{ price.cost_price }}</p></td>
+                                    <td><p class="mb-0 font-weight-normal">@{{ price.selling_price }}</p></td>
 
+                                    <td class="p-3">
+                                        <div class="d-flex flex-row justify-content-around align-items-center">
+
+                                            <a href="#" data-toggle="modal" data-target="#editProductPrice" @click="selectProductPrice(price)"><i class="fas fa-pencil-alt text-success"></i></a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        @include('modals.products.edit-price')
                     </div>
                 </div>
 

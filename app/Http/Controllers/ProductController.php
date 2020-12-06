@@ -23,17 +23,23 @@ class ProductController extends Controller
      * @var ProductRepositoryInterface
      */
     private $productRepository;
+    /**
+     * @var ProductPriceRepositoryInterface
+     */
+    private $productPriceRepository;
 
     /**
      * ProductController constructor.
      * @param Request $request
      * @param ProductRepositoryInterface $productRepository
+     * @param ProductPriceRepositoryInterface $productPriceRepository
      */
-    public function __construct(Request $request, ProductRepositoryInterface $productRepository)
+    public function __construct(Request $request, ProductRepositoryInterface $productRepository, ProductPriceRepositoryInterface $productPriceRepository)
     {
 
         $this->request = $request;
         $this->productRepository = $productRepository;
+        $this->productPriceRepository = $productPriceRepository;
     }
     public function index()
     {
@@ -163,6 +169,28 @@ class ProductController extends Controller
             ]);
             $product = $this->productRepository->detailsById($data['product_id'], ['*'], ['images', 'prices']);
             return response()->json($product, 200);
+        }catch (ValidationException $exception){
+            return response()->json([
+                'message' => $exception->errors()
+            ], 422);
+        }catch (QueryException|\Exception $exception){
+            return response()->json([
+                'message' => 'Something Went wrong.'
+            ], 406);
+        }
+    }
+
+    public function priceUpdate()
+    {
+        try {
+            $data = $this->validate($this->request, [
+                'price_id' => 'required|integer|exists:product_prices,id',
+                'cost_price' => 'required|numeric',
+                'selling_price' => 'required|numeric|gt:cost_price',
+                'quantity' => 'required|numeric|gt:0'
+            ]);
+            $this->productPriceRepository->update($data['price_id'],$data);
+            return response()->json([], 204);
         }catch (ValidationException $exception){
             return response()->json([
                 'message' => $exception->errors()
