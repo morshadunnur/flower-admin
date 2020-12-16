@@ -49,7 +49,7 @@ class ProductRepository implements ProductRepositoryInterface
            'description' => $data['description'],
            'sku' => $data['sku'],
            'category_id' => $data['category_id'],
-           'feature_image' => $data['image']['file_name'],
+           'feature_image' => config('flower.product_image.base_path').config('flower.product_image.original').$data['image']['file_name'],
            'status' => $data['status'],
            'published_by' => $data['published_by'],
         ]);

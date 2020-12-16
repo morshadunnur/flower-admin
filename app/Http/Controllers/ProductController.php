@@ -80,7 +80,7 @@ class ProductController extends Controller
             ]);
 
             $data['published_by'] = auth()->user()->id;
-            $data['image'] = $this->uploadSingleImage($data['feature_image'], '/products', 'public', true, 200);
+            $data['image'] = $this->uploadSingleImage($data['feature_image'], config('flower.product_image.original'), 'public', true, 200);
             $data['images'] = [];
             foreach ($data['gallery'] as $gallery){
                 $data['images'][] = $this->uploadSingleImage($gallery, '/gallery', 'public', true);

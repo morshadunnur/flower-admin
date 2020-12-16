@@ -30,7 +30,7 @@ trait UploadFile
                 Image::make($uploadedFile)->orientate()->resize($resize_value, null, function ($constraint){
                     $constraint->aspectRatio();
                 })->save($temp_upload . $file_name)->destroy();
-                $resized_path = app('filesystem')->disk($disk)->putFileAs($folder.'/resized', new File($temp_upload . $file_name), $file_name, 'public');
+                $resized_path = app('filesystem')->disk($disk)->putFileAs($folder.config('flower.product_image.thumb'), new File($temp_upload . $file_name), $file_name, 'public');
             }
         }catch (\Exception $exception){
             Log::debug('Image upload error', [$exception->getMessage()]);
