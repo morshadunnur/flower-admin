@@ -33,7 +33,7 @@ class ProductImageRepository implements ProductImageRepositoryInterface
         foreach ($data['images'] as $image){
             $this->model->create([
                 'product_id' => $data['product_id'],
-                'name' => $image['file_name'],
+                'name' => config('flower.product_image.base_path').config('flower.product_image.gallery').$image['file_name'],
                 'type' => 1,
             ]);
         }

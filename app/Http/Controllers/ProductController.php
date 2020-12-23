@@ -83,7 +83,7 @@ class ProductController extends Controller
             $data['image'] = $this->uploadSingleImage($data['feature_image'], config('flower.product_image.original'), 'public', true, 200);
             $data['images'] = [];
             foreach ($data['gallery'] as $gallery){
-                $data['images'][] = $this->uploadSingleImage($gallery, '/gallery', 'public', true);
+                $data['images'][] = $this->uploadSingleImage($gallery, config('flower.product_image.gallery'), 'public', true);
             }
             DB::beginTransaction();
             try {
