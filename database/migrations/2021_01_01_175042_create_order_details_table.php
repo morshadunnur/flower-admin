@@ -18,6 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreignId('order_id');
             $table->foreignId('product_id');
             $table->decimal('quantity', 8, 2);
+            $table->decimal('price', 8, 2);
             $table->boolean('status')->default(1);
             $table->dateTime('delivery_date')->nullable();
             $table->timestamps();

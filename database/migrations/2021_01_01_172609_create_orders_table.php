@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('customer_id');
             $table->tinyInteger('global_order_status')->default(1)->comment('
                 1 = placed
                 2 = processing
